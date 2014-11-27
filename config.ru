@@ -12,5 +12,5 @@ index = AnagramService::Index.from_wordfile
 logger.info "Done indexing."
 
 use Rack::ShowExceptions
-use Rack::CommonLogger, logger
+#use Rack::CommonLogger, logger
 run AnagramService::App.new(index)

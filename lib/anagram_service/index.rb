@@ -6,7 +6,6 @@ module AnagramService
       File.expand_path('wordlist.txt',
                        File.join(__dir__, '..','..', 'resources'))
 
-
     def initialize(h)
       @anagrams = h
     end
@@ -23,7 +22,6 @@ module AnagramService
       key = self.class.index_key(word)
       @anagrams.fetch(key, []) - [word]
     end
-
 
     def self.from_wordfile(words_file = WORDS_FILE)
       anagrams = {}

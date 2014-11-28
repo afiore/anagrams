@@ -3,15 +3,12 @@ require 'set'
 module AnagramService
   class Index
     WORDS_FILE =
-      File.expand_path('wordlist.txt', File.join(__dir__, '..','..', 'resources'))
+      File.expand_path('wordlist.txt',
+                       File.join(__dir__, '..','..', 'resources'))
+
 
     def initialize(h)
       @anagrams = h
-    end
-
-    def lookup_word(word)
-      key = self.class.index_key(word)
-      @anagrams.fetch(key, []) - [word]
     end
 
     def lookup_words(words)
@@ -19,6 +16,14 @@ module AnagramService
         acc.merge(word => lookup_word(word))
       end
     end
+
+    private
+
+    def lookup_word(word)
+      key = self.class.index_key(word)
+      @anagrams.fetch(key, []) - [word]
+    end
+
 
     def self.from_wordfile(words_file = WORDS_FILE)
       anagrams = {}

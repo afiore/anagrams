@@ -19,6 +19,7 @@ class AppTest < Test::Unit::TestCase
   def test_multiple_words_lookup
     get '/crepitus,paste,kinship,enlist,boaster,fresher,refresh,sinks,knits,sort'
     anagrams = JSON.parse(last_response.body)
+
     assert_equal ["cuprites","pictures","piecrust"], anagrams.fetch('crepitus')
     assert_equal ["pates","peats","septa","spate","tapes","tepas"], anagrams.fetch('paste')
     assert_equal ["pinkish"], anagrams.fetch('kinship')
@@ -34,5 +35,11 @@ class AppTest < Test::Unit::TestCase
     get '/missing-word'
     anagrams = JSON.parse(last_response.body).fetch('missing-word')
     assert_equal [], anagrams
+  end
+
+  def test_empty_word_list
+    get '/'
+    assert JSON.parse(last_response.body).has_key?('error')
+    assert_equal 400, last_response.status
   end
 end

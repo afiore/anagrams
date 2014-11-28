@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    puma (2.10.2)
+      rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -9,5 +11,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  puma
   rack
   rack-test

@@ -9,11 +9,16 @@ module AnagramService
     end
 
     def call(env)
-      req      = Rack::Request.new(env)
-      words    = req.path[1..-1].split(',')
-      anagrams = @index.lookup_words(words).to_json
+      request      = Rack::Request.new(env)
+      words        = request.path[1..-1].split(',')
+      status, body =
+        if words.empty?
+          [400, { error: "Bad request. Please supply a comma-separated list of words as the request path." }.to_json]
+        else
+          [200, @index.lookup_words(words).to_json]
+        end
 
-      Rack::Response.new([anagrams], 200, {'ContentType' => 'application/json'})
+      Rack::Response.new([body], status, {'ContentType' => 'application/json'})
     end
   end
 end

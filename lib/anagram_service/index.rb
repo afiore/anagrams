@@ -37,7 +37,7 @@ module AnagramService
     end
 
     def self.index_key(word)
-      word.chars.sort
+      word.chars.sort.join('')
     end
   end
 end

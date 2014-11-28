@@ -7,7 +7,7 @@ require 'anagram_service/index'
 require 'anagram_service/app'
 
 logger  = Logger.new(STDOUT)
-logger.info "Indexing words... This might take a few minutes!"
+logger.info "Indexing words..."
 index = AnagramService::Index.from_wordfile
 logger.info "Done indexing."
 
